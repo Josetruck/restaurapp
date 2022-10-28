@@ -34,34 +34,31 @@ function iniciarSesion() {
 
 function imprimirTicket(id_ticket_entrada) {
     let tabla = document.getElementById("t_tabla");
-    let articulos = JSON.parse(localStorage.menu).nombre;
-    let precios = JSON.parse(localStorage.menu).precio;
     let ticketsLista = JSON.parse(localStorage.ticket);
     let ticket = ticketsLista.filter((element) => {
         if (element.id_ticket == id_ticket_entrada) {
             return element
         }
     })
-    let comanda = ticket[0].comanda;
-    var totalCuenta = 0;
+    var comanda = ticket[0].comanda;
+    var totalCuenta = ticket[0].total;
     for (let i = 0; i < comanda.length; i++) {
-        if (comanda[i] > 0) {
+        if (comanda[i].cantidad > 0) {
             var fila = document.createElement("tr");
             var articulo = document.createElement("td");
             var precio = document.createElement("td");
             var cant = document.createElement("td");
             var total = document.createElement("td");
-            articulo.innerHTML = articulos[i];
+            articulo.innerHTML = comanda[i].nombre_articulo;
             articulo.setAttribute("class", "t_articulos")
-            precio.innerHTML = precios[i];
-            cant.innerHTML = comanda[i];
-            total.innerHTML = comanda[i] * precios[i];
+            precio.innerHTML = comanda[i].precio;
+            cant.innerHTML = comanda[i].cantidad;
+            total.innerHTML = comanda[i].cantidad * comanda[i].precio;
             fila.appendChild(articulo);
             fila.appendChild(cant);
             fila.appendChild(precio);
             fila.appendChild(total);
             tabla.appendChild(fila);
-            totalCuenta += (comanda[i] * precios[i]);
         }
     }
     var p_total = document.getElementById("t_total");

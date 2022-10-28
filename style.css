@@ -248,6 +248,8 @@ section#m_mesa {
 div#m_comanda {
     margin-left: 10px;
     margin-right: 10px;
+    display: flex;
+    flex-direction: row;
 }
 
 section#m_mesa h1 {
@@ -376,7 +378,10 @@ summary{
     height: 52.4px;
 }
 
-
+#m_dsp_bebidas, #m_dsp_comidas, #m_dsp_postres{
+    margin: 0;
+    padding: 0;
+}
 
 
 /* ----------------------------------------- Ticket ------------------------ */

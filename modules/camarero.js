@@ -1,6 +1,5 @@
 //---------------------------------- camarero ----------------------------------------------
 
-
 //Baja datos de las mesas y camarero logueado - llama a la función que carga la info
 function camareroIn() {
     var camareros = JSON.parse(localStorage.camarero);
