@@ -62,6 +62,100 @@ function guardarCambios() {
     localStorage.setItem("camarero", JSON.stringify(users))
 }
 
+function imprimirTicketModificacion() {
+    let id_ticket = localStorage.ticketSeleccionado
+    let ticketsLista = JSON.parse(localStorage.ticket);
+    let ticket = ticketsLista.filter((element) => {
+        if (element.id_ticket == id_ticket) {
+            return element
+        }
+    });
+    var comanda = ticket[0].comanda;
+    var articulos = JSON.parse(localStorage.articulos)
+    var ulBebidas = document.getElementById("m_dsp_bebidas");
+    var ulComidas = document.getElementById("m_dsp_comidas");
+    var ulPostres = document.getElementById("m_dsp_postres");
+    //borro todos los li que habia en cada apartado para imprimir los nuevos valores
+    while (ulBebidas.firstChild) {
+        ulBebidas.removeChild(ulBebidas.lastChild);
+    }
+    while (ulComidas.firstChild) {
+        ulComidas.removeChild(ulComidas.lastChild);
+    }
+    while (ulPostres.firstChild) {
+        ulPostres.removeChild(ulPostres.lastChild);
+    }
+    for (let i = 0; i < comanda.length; i++) {
+        if (comanda[i].cantidad > 0) {
+            let li = document.createElement("li");
+            let texto = document.createTextNode(articulos[i].nombre + ": " + comanda[i].cantidad);
+            li.appendChild(texto);
+            if (articulos[i].tipo == "bebida") {
+                ulBebidas.appendChild(li)
+            }
+            if (articulos[i].tipo == "comida") {
+                ulComidas.appendChild(li)
+            }
+            if (articulos[i].tipo == "postre") {
+                ulPostres.appendChild(li)
+            }
+        }
+    }
+}
+
+function modificarTicket() {
+    let id_ticket = localStorage.ticketSeleccionado
+    let ticketsLista = JSON.parse(localStorage.ticket);
+    var index = ticketsLista.findIndex((item, i) => {
+        return item.id_ticket == id_ticket
+    });
+    var displays = document.getElementsByClassName("m_display");
+    var comanda = ticketsLista[index].comanda;
+    for (let i = 0; i < displays.length; i++) {
+        for (let j = 0; j < comanda.length; j++) {
+            if (parseInt(displays[i].innerHTML) > 0 && comanda[j].id_articulo == displays[i].id) {
+                comanda[j].cantidad = parseInt(comanda[j].cantidad) + parseInt(displays[i].innerHTML);
+                displays[i].innerHTML = 0;
+            }
+            // Esta parte resta articulos a la comanda. Para corregir errores.
+            if (parseInt(displays[i].innerHTML) < 0 && comanda[j].id_articulo == displays[i].id) {
+                var confirmación = confirm("Estás a punto de realizar una modificación de la comanda guardada. ¿Deseas continuar?");
+                if (confirmación) {
+                    if (comanda[j].cantidad >= Math.abs(parseInt(displays[i].innerHTML))) {
+                        comanda[j].cantidad = parseInt(comanda[j].cantidad) + parseInt(displays[i].innerHTML);
+                        displays[i].innerHTML = 0;
+                    } else { alert("No se pueden restar más articulos.") }
+                }
+            }
+        }
+    }
+    ticketsLista[index].comanda = comanda;
+    localStorage.setItem("ticket", JSON.stringify(ticketsLista));
+    imprimirTicketModificacion();
+}
+function mostrarTickets(){
+    let tickets = JSON.parse(localStorage.ticket);
+    for (let i = 0; i < tickets.length; i++) {
+            var idTicket = tickets[i].id_ticket
+            var botonTicket = document.createElement('button');
+            botonTicket.className = `c_ticket`;
+            botonTicket.addEventListener('click', () => {
+                consulta_ticket2(idTicket);
+                window.location = "modificaTicket.html"
+            })
+            var id = document.createTextNode(`Fecha: ${tickets[i].fecha} | id: ${idTicket}`);
+            botonTicket.appendChild(id);
+            document.querySelector('#a_historial').appendChild(botonTicket);
+
+        }
+    }
+
+function consulta_ticket2(id_ticket) {
+    localStorage.setItem("ticketSeleccionado", id_ticket);
+    window.location = "modificaTicket.html";
+}
+
+
 
 
 
@@ -70,7 +164,7 @@ function guardarCambios() {
 function cargarGraficos(num) {
 
     // DATOS -------------
-    
+
     var tickets = JSON.parse(localStorage.ticket)
     var camareros = JSON.parse(localStorage.camarero)
     var total = [0]
@@ -79,36 +173,36 @@ function cargarGraficos(num) {
     var total3 = [0]
     var total4 = [0]
     var mesas = 0, mesas1 = 0, mesas2 = 0, mesas3 = 0, mesas4 = 0;
-    var sTotal = 0, sTotal1 = 0, sTotal2 = 0, sTotal3 = 0, sTotal4 = 0; 
-    if(tickets != null) {
-    for (let i = 0; i < tickets.length; i++) {
-        total.push(tickets[i].total)
-        if (tickets[i].nombre_camarero == camareros[0].nombre_camarero) {
-            total1.push(tickets[i].total)
+    var sTotal = 0, sTotal1 = 0, sTotal2 = 0, sTotal3 = 0, sTotal4 = 0;
+    if (tickets != null) {
+        for (let i = 0; i < tickets.length; i++) {
+            total.push(tickets[i].total)
+            if (tickets[i].nombre_camarero == camareros[0].nombre_camarero) {
+                total1.push(tickets[i].total)
+            }
+            if (tickets[i].nombre_camarero == camareros[1].nombre_camarero) {
+                total2.push(tickets[i].total)
+            }
+            if (tickets[i].nombre_camarero == camareros[2].nombre_camarero) {
+                total3.push(tickets[i].total)
+            }
+            if (tickets[i].nombre_camarero == camareros[3].nombre_camarero) {
+                total4.push(tickets[i].total)
+            }
         }
-        if (tickets[i].nombre_camarero == camareros[1].nombre_camarero) {
-            total2.push(tickets[i].total)
-        }
-        if (tickets[i].nombre_camarero == camareros[2].nombre_camarero) {
-            total3.push(tickets[i].total)
-        }
-        if (tickets[i].nombre_camarero == camareros[3].nombre_camarero) {
-            total4.push(tickets[i].total)
-        }
+        mesas = total.length - 1
+        mesas1 = total1.length - 1
+        mesas2 = total2.length - 1
+        mesas3 = total3.length - 1
+        mesas4 = total4.length - 1
+        sTotal = total.reduce(function (a, b) { return a + b });
+        sTotal1 = total1.reduce(function (a, b) { return a + b });
+        sTotal2 = total2.reduce(function (a, b) { return a + b });
+        sTotal3 = total3.reduce(function (a, b) { return a + b });
+        sTotal4 = total4.reduce(function (a, b) { return a + b });
+    } else {
+        document.getElementById('a_resultados').innerHTML = "No hay datos"
     }
-    mesas = total.length-1
-    mesas1 = total1.length-1
-    mesas2 = total2.length-1
-    mesas3 = total3.length-1
-    mesas4 = total4.length-1
-    sTotal = total.reduce(function (a, b) { return a + b });
-    sTotal1 = total1.reduce(function (a, b) { return a + b });
-    sTotal2 = total2.reduce(function (a, b) { return a + b });
-    sTotal3 = total3.reduce(function (a, b) { return a + b });
-    sTotal4 = total4.reduce(function (a, b) { return a + b });
-} else {
-    document.getElementById('a_resultados').innerHTML = "No hay datos"
-}
     /*---- Config graficas ----*/
     const labels = [
         'total',

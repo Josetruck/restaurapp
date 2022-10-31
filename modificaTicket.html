@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="mostrarArticulos(); cambiarTitulo(); mostrarComanda()">
+<body onload="mostrarArticulos(); imprimirTicketModificacion()">
     <button id="m_volver" onclick="window.location = 'camarero.html'">Volver &#8634</button>
     <section id="m_contenedorGeneral">
         <section id="m_mesa">
-            <h1 id="m_titulo">Mesa</h1>
+            <h1 id="m_titulo">Modificar ticket</h1>
             <h2>Comanda:</h2>
             <div id="m_comanda">
                 <div>
@@ -57,11 +57,11 @@
         </details>
 
         <div id="m_botones">
-            <button id="m_añadir" onclick="guardarComanda()">Añadir comanda</button>
-            <button id="m_cerrarMesa" onclick="cerrarMesa()">Generar cuenta</button>
+            <button id="m_añadir" onclick="modificarTicket()">Modificar</button>
         </div>
     </section>
 </body>
 <script src="script.js"></script>
 <script src="modules/mesa.js"></script>
+<script src="modules/admin.js"></script>
 </html>

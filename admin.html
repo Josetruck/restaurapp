@@ -9,7 +9,7 @@
     
 </head>
 
-<body id="a_body" onload="cargarGraficos();">
+<body id="a_body" onload="cargarGraficos(); mostrarTickets()">
 
     <header id="a_header">
         <h2 id="a_nombre">Admin Área</h2>
@@ -52,6 +52,11 @@
         <button onclick="mostrarDatos()">Mostrar datos</button>      
         <button onclick="guardarCambios()">Guardar cambios</button>
     </div>
+    <details id="a_ticket">
+        <summary  class= "c_style">Historial tickets</summary>
+        <div id="a_historial">
+        </div>
+    </details>
     <div class="a_resultados1">
     <details>
         <summary class= "c_style">
@@ -67,6 +72,6 @@
                 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js" type="module"></script>
+    <script src="modules/admin.js"></script>
 </body>
 </html>

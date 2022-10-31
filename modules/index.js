@@ -10,7 +10,6 @@ function iniciarSesion() {
     let password = users.map(element => element.password);
     let id_camarero = users.map(element => element.id_camarero);
     var popup = document.getElementById("c_popup");
-    console.log(popup)
     if (loginUser == "admin" && loginPass == "nimda") {
         window.location = "admin.html"
     }

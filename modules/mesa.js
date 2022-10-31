@@ -49,13 +49,14 @@ function mostrarComanda() {
     }
 }
 
-function mostrarArticulos() {
-    //Poner número en el titulo de mesa
-    var titulo=document.getElementById("m_titulo");
+//Poner número en el titulo de mesa
+function cambiarTitulo() {
+    var titulo = document.getElementById("m_titulo");
     var mesaActual = localStorage.mesaActual;
-    titulo.innerText= `Mesa ${parseInt(mesaActual)+1}`
-    //Muestra los productos que se han pedido en la parte superior de la pantalla
-    mostrarComanda();
+    titulo.innerText = `Mesa ${parseInt(mesaActual) + 1}`
+}
+
+function mostrarArticulos() {
     //Aqui pongo los articulos en el menú desplegable
     var articulos = JSON.parse(localStorage.articulos)
     var div_bebidas = document.getElementById("m_bebidas");
@@ -118,9 +119,9 @@ function restar(id) {
     }
     var display = displays[i];
     var valorAnterior = parseInt(display.innerHTML);
-    if (valorAnterior != 0) {
-        display.innerHTML = valorAnterior - 1;
-    }
+    //if (valorAnterior != 0) {
+    display.innerHTML = valorAnterior - 1;
+    //}
 }
 
 //---------------------------- guardar comanda -----------------------
@@ -130,16 +131,25 @@ function guardarComanda() {
     var mesas = JSON.parse(localStorage.mesa);
     var displays = document.getElementsByClassName("m_display");
     var comanda = mesas[mesaActual].comanda;
-    console.log(comanda.length)
     for (let i = 0; i < displays.length; i++) {
         for (let j = 0; j < comanda.length; j++) {
             if (parseInt(displays[i].innerHTML) > 0 && comanda[j].id_articulo == displays[i].id) {
-                console.log("coincide")
                 comanda[j].cantidad = parseInt(comanda[j].cantidad) + parseInt(displays[i].innerHTML);
                 displays[i].innerHTML = 0;
             }
+            // Esta parte resta articulos a la comanda. Para corregir errores.
+            if (parseInt(displays[i].innerHTML) < 0 && comanda[j].id_articulo == displays[i].id) {
+                var confirmación = confirm("Estás a punto de realizar una modificación de la comanda guardada. ¿Deseas continuar?");
+                if (confirmación) {
+                    if (comanda[j].cantidad >= Math.abs(parseInt(displays[i].innerHTML))) {
+                        comanda[j].cantidad = parseInt(comanda[j].cantidad) + parseInt(displays[i].innerHTML);
+                        displays[i].innerHTML = 0;
+                    } else { alert("No se pueden restar más articulos.") }
+                }
+            }
         }
     }
+
 
     mesas[mesaActual].comanda = comanda;
     localStorage.setItem("mesa", JSON.stringify(mesas));
@@ -165,7 +175,7 @@ function cerrarMesa() {
     var ticketsLista = JSON.parse(localStorage.getItem("ticket"));
     var comanda = mesa[mesaActual].comanda;
     var total = 0;
-    for(let i=0;i<comanda.length;i++){
+    for (let i = 0; i < comanda.length; i++) {
         total += comanda[i].cantidad + comanda[i].precio
     }
     var pagado = false;
