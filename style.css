@@ -1,5 +1,5 @@
 /* ------------------------------- ADMIN AREA --------------------------------------- */
-body, #c_popup{
+.fondopatron{
     background-image: url("images/fondoMonocromo.png");
     margin: none;
     padding: none;
@@ -385,6 +385,9 @@ summary{
 
 
 /* ----------------------------------------- Ticket ------------------------ */
+.fondoblanco{
+    background-color: white;
+}
 #t_header {
     display: flex;
     justify-content: space-around;
@@ -408,6 +411,7 @@ summary{
 }
 
 #t_body {
+    background-color: white;
     display: flex;
     flex-direction: column;
     text-align: center;
