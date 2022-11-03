@@ -160,7 +160,13 @@ function guardarComanda() {
 //Cerrar Mesa
 function cerrarMesa() {
     var fecha = new Date;
-    var fechaticket = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getFullYear() + " " + fecha.getHours() + ":" + fecha.getMinutes();
+    console.log(fecha)
+    var fechaticket = "";
+    if(fecha.getMinutes < 10){
+    fechaticket =  `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()}  ${fecha.getHours()}:0${fecha.getMinutes()}`;
+    } else {
+    fechaticket =  `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
+    }
 
     let users = JSON.parse(localStorage.camarero);
     let username = users.map(element => element.nombre_camarero);
@@ -176,7 +182,7 @@ function cerrarMesa() {
     var comanda = mesa[mesaActual].comanda;
     var total = 0;
     for (let i = 0; i < comanda.length; i++) {
-        total += comanda[i].cantidad + comanda[i].precio
+        total += comanda[i].cantidad * comanda[i].precio
     }
     var pagado = false;
     var inicioTicket = [];

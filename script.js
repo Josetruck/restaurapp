@@ -34,9 +34,9 @@ function iniciar() {
         var articulos = [];
         var menu = {
             "id_articulo": ["a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11", "a12", "a13", "a14", "a15", "a16", "a17", "a18", "a19", "a20"],
-            "tipo": ["bebida", "bebida", "bebida", "bebida", "bebida", "bebida", "bebida", "comida", "comida", "comida", "comida", "comida", "comida", "comida", "comida", "comida", "comida", "postre", "postre", "postre", "postre"],
+            "tipo": ["bebida", "bebida", "bebida", "bebida", "bebida", "bebida", "bebida", "comida", "comida", "comida", "comida", "comida", "comida", "comida", "comida", "comida", "postre", "postre", "postre", "postre", "postre"],
             'nombre': ['Vino tinto', 'Vino blanco', 'Cerveza', 'Refresco', 'Zumo', 'Café', 'Café especial', 'Gazpacho', 'Ensalada mixta', 'Ensaladilla', 'Lasaña', 'Puré de verduras', 'Secreto ibérico', 'Escalope de pollo', 'Bacalao a la riojana', 'Hamburguesa', 'Tarta de queso', 'Fruta del tiempo', 'Flan de la casa', 'Tarta de la abuela', 'Varios'],
-            'precio': [3, 3, 2.5, 2.5, 2.5, 1.2, 1.9, 4, 3.5, 3.5, 5, 3, 12, 8.5, 14, 9.5, 2, 3, 4, 5, 1]
+            'precio': [3, 3, 2.5, 2.5, 2.5, 1.5, 2, 4, 3.5, 3.5, 5, 3, 12, 8.5, 14, 9.5, 2, 3, 4, 5, 1]
         }
         for(let i=0; i<menu.id_articulo.length;i++){
             var articulo = new Articulo(menu.id_articulo[i], menu.tipo[i], menu.nombre[i], menu.precio[i]);
