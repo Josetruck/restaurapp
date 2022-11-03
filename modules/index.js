@@ -9,7 +9,6 @@ function iniciarSesion() {
     let username = users.map(element => element.nombre_camarero);
     let password = users.map(element => element.password);
     let id_camarero = users.map(element => element.id_camarero);
-    var popup = document.getElementById("c_popup");
     if (loginUser == "admin" && loginPass == "nimda") {
         window.location = "admin.html"
     }
@@ -41,6 +40,8 @@ function imprimirTicket(id_ticket_entrada) {
     })
     var comanda = ticket[0].comanda;
     var totalCuenta = ticket[0].total;
+    
+    //imprime cada uno de los artículos de la comanda que ha consumido, si la cantidad es 0 no se imprime el articulo.
     for (let i = 0; i < comanda.length; i++) {
         if (comanda[i].cantidad > 0) {
             var fila = document.createElement("tr");
@@ -72,6 +73,7 @@ function imprimirTicket(id_ticket_entrada) {
     p_id_mesa.innerText = ticket[0].id_mesa + 1;
 }
 
+//comprueba si el ticket está pagado y si no está pagado lo guarda en localStorage para usar ese parametro en las funciones de imprimir ticket en las otras paginas.
 function consulta_ticket(id_ticket) {
     var tickets = JSON.parse(localStorage.ticket)
     var pagado = tickets[id_ticket].pagado;

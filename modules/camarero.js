@@ -22,7 +22,7 @@ function borraMesas() {
 function cargarMesas(camareroActual, mesas) {
     //BORRA MESAS ANTERIORES PARA ACTUALIZAR
     borraMesas();
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i<mesas.length; i++) {
         //FILTRA MESAS ABIERTAS DEL CAMARERO Y LAS PINTA
         if (mesas[i].estado == 'abierta' && mesas[i].id_camarero == camareroActual) {
             var divMesa = document.createElement('button');
@@ -71,6 +71,7 @@ function enviaMesa(indice) {
     window.location = "mesa.html"
 }
 
+//Muestra los tickets que se han producido por el camarero que tiene la sesion iniciada.
 function historial() {
     var tickets = JSON.parse(localStorage.ticket);
     var camareros = JSON.parse(localStorage.camarero);
