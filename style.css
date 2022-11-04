@@ -110,7 +110,11 @@ p.a_rendimiento {
     width: 26vw;
 }
 
-
+#m_titulo{
+    text-align: center;
+    font-size: 12vw;
+    margin-bottom: 40px;
+}
 
 
 /*---------------------------------------CAMARERO-----------------*/
@@ -473,7 +477,38 @@ button {
 }
 
 /* -----------------------------------------------------------DETAILS-------------------------------------- */
-
+#detailscontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#numeroMesas{
+    text-align: center;
+}
+#menu_modificaciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#muestra_articulos div{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+#nuevos_articulos{
+    display: flex;
+    flex-direction: column;
+}
+#nuevos_articulos > input, #nuevos_articulos > select, #nuevos_articulos > button{
+margin: 5px;
+}
+#muestra_articulos div button {
+margin-top: 10px;
+}
+#muestra_articulos div p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    }
 summary.c_style::marker,
 summary::marker {
     color: rgba(255, 255, 255, 0);
@@ -572,6 +607,7 @@ div#m_comanda div {
     font-size: 3vw;
 
 }
+
 
 /* copas = U+1F37B
 hamburguesa = U+1F354

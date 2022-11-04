@@ -101,6 +101,16 @@ function imprimirTicketModificacion() {
             }
         }
     }
+    var p_total = document.getElementById("t_total");
+    p_total.innerText = `${ticket[0].total} €`;
+    var p_camarero = document.getElementById("t_nombreCamarero");
+    p_camarero.innerText = ticket[0].nombre_camarero;
+    var p_id_ticket = document.getElementById("t_id_ticket");
+    p_id_ticket.innerText = ticket[0].id_ticket;
+    var p_fecha = document.getElementById("t_fecha");
+    p_fecha.innerText = ticket[0].fecha;
+    var p_id_mesa = document.getElementById("t_id_mesa");
+    p_id_mesa.innerText = ticket[0].id_mesa + 1;
 }
 
 function modificarTicket() {
