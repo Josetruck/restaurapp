@@ -1,5 +1,4 @@
-// --------------------------------------- mesa --------------------------------------------------------
-//TICKET
+
 class Ticket {
     constructor(id_ticket, fecha, id_mesa, nombre_camarero, comanda, total, pagado) {
         this.id_ticket = id_ticket;
@@ -198,7 +197,13 @@ function cerrarMesa() {
         localStorage.setItem("ticket", JSON.stringify(ticketsLista));
     }
     mesa[mesaActual].estado = 'cerrada';
-    mesa[mesaActual].comanda = [];
+
+    var comandaInit = [];
+    var articulos = JSON.parse(localStorage.articulos)
+    for (let i = 0; i < articulos.length; i++) {
+        comandaInit.push(new Comanda(articulos[i].id_articulo, articulos[i].nombre, 0, articulos[i].precio))
+    }
+    mesa[mesaActual].comanda = comandaInit;
     localStorage.setItem('mesa', JSON.stringify(mesa));
 
 // vuelve a la página de camarero y coloca la mesa como cerrada y las vuelve a guardar.

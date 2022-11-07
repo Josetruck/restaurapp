@@ -591,6 +591,14 @@ details#m_postres[open]>summary:before {
 }
 
 
+details#a_ticket[open] div {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   align-content: center;
+   
+   }
+
 /* ------------------------------------------------tabla comanda------------------------------------ */
 
 div#m_comanda div ul {

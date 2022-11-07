@@ -70,7 +70,7 @@ function imprimirTicket(id_ticket_entrada) {
     var p_fecha = document.getElementById("t_fecha");
     p_fecha.innerText = ticket[0].fecha;
     var p_id_mesa = document.getElementById("t_id_mesa");
-    p_id_mesa.innerText = ticket[0].id_mesa + 1;
+    p_id_mesa.innerText = parseInt(ticket[0].id_mesa) + 1;
 }
 
 //comprueba si el ticket está pagado y si no está pagado lo guarda en localStorage para usar ese parametro en las funciones de imprimir ticket en las otras paginas.
