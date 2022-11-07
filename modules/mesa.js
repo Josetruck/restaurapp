@@ -159,11 +159,12 @@ function guardarComanda() {
 //Cerrar Mesa
 function cerrarMesa() {
     var fecha = new Date;
+    console.log(fecha)
     var fechaticket = "";
-    if (fecha.getMinutes < 10) {
-        fechaticket = `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()}  ${fecha.getHours()}:0${fecha.getMinutes()}`;
+    if (parseInt(fecha.getMinutes()) < 10) {
+        fechaticket = `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()}  ${fecha.getHours()}:0${fecha.getMinutes()}`;
     } else {
-        fechaticket = `${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
+        fechaticket = `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
     }
 
     let users = JSON.parse(localStorage.camarero);
